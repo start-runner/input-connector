@@ -17,26 +17,30 @@ npm i -S start-input-connector
 ## Usage
 
 ```js
-import start from 'start';
+import Start from 'start';
 import reporter from 'start-pretty-reporter';
 import files from 'start-files';
 import inputConnector from 'start-input-connector';
 import eslint from 'start-eslint';
 
+const start = Start(reporter());
+
 function lint(input) {
-    inputConnector(input),
-    eslint()
+    return start(
+        inputConnector(input),
+        eslint()
+    );
 }
 
 export function lintLib() {
-    return start(reporter())(
+    return start(
         files([ 'lib/**/*.js' ]),
         lint
     );
 }
 
 export function lintTest() {
-    return start(reporter())(
+    return start(
         files([ 'test/**/*.js' ]),
         lint
     );
