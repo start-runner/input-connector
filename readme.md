@@ -10,8 +10,10 @@ Input connector task for [Start](https://github.com/start-runner/start), helps t
 
 ## Install
 
-```
-npm i -S start-input-connector
+```sh
+npm install --save-dev start-input-connector
+# or
+yarn add --dev start-input-connector
 ```
 
 ## Usage
@@ -25,26 +27,20 @@ import eslint from 'start-eslint';
 
 const start = Start(reporter());
 
-function lint(input) {
-    return start(
-        inputConnector(input),
-        eslint()
-    );
-}
+const lint = (input) => start(
+  inputConnector(input),
+  eslint()
+);
 
-export function lintLib() {
-    return start(
-        files([ 'lib/**/*.js' ]),
-        lint
-    );
-}
+export const lintLib = () => start(
+  files([ 'lib/**/*.js' ]),
+  lint
+);
 
-export function lintTest() {
-    return start(
-        files([ 'test/**/*.js' ]),
-        lint
-    );
-}
+export const lintTest = () => start(
+  files([ 'test/**/*.js' ]),
+  lint
+);
 ```
 
 See [documentation](https://github.com/start-runner/start#readme) for details.
